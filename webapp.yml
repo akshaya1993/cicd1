@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+  - name: create new container
+    shell: docker run -itd --name dockeransible -p 9000:9000 akshaya1993/cicd1
