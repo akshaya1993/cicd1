@@ -5,22 +5,8 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y apache2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Create a new directory for the custom web files
-#RUN mkdir -p /var/opt/gci
-
-# Copy the custom webpage.html to the new directory
-RUN cd /var/www/html/
-RUN echo "Jeremy Reid's Week 16 Docker Project" . index.html
-#COPY webpage.html /var/opt/gci/
-
-# Update Apache configuration to serve files from /var/opt/gci
-#RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/opt/gci|' /etc/apache2/sites-available/000-default.conf && \  
- #   sed -i 's|<Directory /var/www/html>|<Directory /var/opt/gci/>|' /etc/apache2/apache2.conf  
-
-#RUN service apache2 restart
- 
-# Ensure permissions are correct for the new document root
-#RUN chmod -R 755 /var/opt/gci
+# Copy the custom index.html to the Apache root directory
+COPY webpage.html /var/www/html/
 
 # Expose port 80 for HTTP traffic
 EXPOSE 80
