@@ -5,10 +5,11 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y apache2 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN rm -f /var/www/html/index1.html
+# Remove any default index.html files
+RUN rm -f /var/www/html/index.html
 
-# Copy the HTML file into the default Apache directory
-COPY index1.html /var/www/html/
+# Copy the custom index1.html to the Apache root directory
+COPY index1.html /var/www/html/index.html
 
 # Expose port 80 for HTTP traffic
 EXPOSE 80
