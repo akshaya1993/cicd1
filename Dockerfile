@@ -11,9 +11,10 @@ RUN rm -f /var/www/html/index.html
 # Copy the custom index1.html to the Apache root directory
 COPY webpage.html /var/opt/
 
+WORKDIR /var/opt/
 # Update Apache configuration to serve files from /var/opt/
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/opt|' /etc/apache2/sites-available/000-default.conf
-
+#RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/opt|' /etc/apache2/sites-available/000-default.conf
+RUN webpage.html
 # Ensure permissions are correct for the new document root
 RUN chmod -R 755 /var/opt
 
