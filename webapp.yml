@@ -2,8 +2,12 @@
 - hosts: all
   become: yes
   tasks:
-  - name: create new container
-    shell: 
-      docker rm -f dockeransible
-      docker run -itd --name dockeransible -p 9000:9000 vaidikprabhu/cicdpipeline
+    - name: Remove existing container if present
+      shell: docker rm -f dockeransible
+      ignore_errors: yes
+
+    - name: Create new container
+      shell: docker run -itd --name dockeransible -p 9000:9000 vaidikprabhu/cicdpipeline
+
+
       
