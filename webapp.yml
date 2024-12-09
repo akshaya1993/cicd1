@@ -4,6 +4,6 @@
   tasks:
   - name: create new container
     shell: 
-      docker ps -a | grep dockeransible
+      docker rm -f dockeransible
       docker run -itd --name dockeransible -p 9000:9000 vaidikprabhu/cicdpipelinedocker ps -a | grep dockeransible
       
