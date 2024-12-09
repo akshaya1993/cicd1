@@ -13,8 +13,9 @@ COPY webpage.html /var/opt/gci/
 
 # Update Apache configuration to serve files from /var/opt/gci
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/opt/gci|' /etc/apache2/sites-available/000-default.conf && \
-    sed -i 's|<Directory /var/www/>|<Directory /var/opt/gci/>|' /etc/apache2/apache2.conf
-
+    sed -i 's|<Directory /var/www/html>|<Directory /var/opt/gci/>|' /etc/apache2/apache2.conf
+ RUN sudo service apache2 restart
+ 
 # Ensure permissions are correct for the new document root
 RUN chmod -R 755 /var/opt/gci
 
