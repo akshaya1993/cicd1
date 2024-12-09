@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y apache2 \
 RUN rm -f /var/www/html/index.html
 
 # Copy the custom index1.html to the Apache root directory
-COPY index1.html /var/www/html/index.html
+COPY webpage.html /var/www/html/
 
 # Expose port 80 for HTTP traffic
 EXPOSE 80
