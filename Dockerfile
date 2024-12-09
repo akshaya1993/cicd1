@@ -5,6 +5,8 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y apache2 \
     && rm -rf /var/lib/apt/lists/*
 
+RUN rm -f /var/www/html/index.html
+
 # Copy the HTML file into the default Apache directory
 COPY index.html /var/www/html/
 
