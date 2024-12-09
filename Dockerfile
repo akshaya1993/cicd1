@@ -5,20 +5,18 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y apache2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Remove any default index.html files
-RUN rm -f /var/www/html/index.html
+# Create a new directory for the custom web files
+RUN mkdir -p /var/opt/gci
 
-# Copy the custom index1.html to the Apache root directory
-
-RUN chmod -R 755 /var/opt
-WORKDIR /var/opt/
-# Update Apache configuration to serve files from /var/opt/
-RUN mkdir -p /var/opt/gci/
+# Copy the custom webpage.html to the new directory
 COPY webpage.html /var/opt/gci/
-#RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/opt|' /etc/apache2/sites-available/000-default.conf
+
+# Update Apache configuration to serve files from /var/opt/gci
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/opt/gci|' /etc/apache2/sites-available/000-default.conf && \
+    sed -i 's|<Directory /var/www/>|<Directory /var/opt/gci/>|' /etc/apache2/apache2.conf
 
 # Ensure permissions are correct for the new document root
-
+RUN chmod -R 755 /var/opt/gci
 
 # Expose port 80 for HTTP traffic
 EXPOSE 80
