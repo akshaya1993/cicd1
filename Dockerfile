@@ -3,7 +3,8 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y apache2 \
     && rm -rf /var/lib/apt/lists/*
 # Copy the custom index.html to the Apache root directory
-COPY webpage.html /var/www/html/.
+RUN mkdir -p /var/www/mysite
+COPY webpage.html /var/www/mysite/.
 RUN service apache2 restart
 RUN a2dissite 000-default.conf
 # Expose port 80 for HTTP traffic
